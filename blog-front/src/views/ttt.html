@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>两边固定中间滚动布局</title>
+  <!-- 引入Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css" rel="stylesheet">
+  <!-- 如果需要，可以在这里添加自定义CSS -->
+</head>
+<body class="min-h-screen">
+  <div class="flex h-screen overflow-hidden">
+    <!-- 左侧固定侧边栏 -->
+    <div class="w-64 flex-shrink-0 bg-gray-200 px-6 py-8">
+      <h2 class="text-xl font-medium mb-6">左侧栏</h2>
+      <!-- 侧边栏内容 -->
+      <p>这里是一些固定内容...</p>
+    </div>
+    
+    <!-- 中间可滚动内容区域 -->
+    <div class="flex-1 flex flex-col overflow-y-auto">
+      <div class="min-h-screen px-6 py-8">
+        <h2 class="text-xl font-medium mb-6">主要内容</h2>
+        <!-- 这里是可滚动的内容，可以添加很多段落来测试滚动 -->
+        <p v-for="i in 50" :key="i" class="mb-4">这是一段文本，测试滚动效果。</p>
+      </div>
+    </div>
+    
+    <!-- 右侧固定侧边栏 -->
+    <div class="w-64 flex-shrink-0 bg-gray-200 px-6 py-8">
+      <h2 class="text-xl font-medium mb-6">右侧栏</h2>
+      <!-- 侧边栏内容 -->
+      <p>这也是一些固定内容...</p>
+    </div>
+  </div>
+</body>
+</html>
