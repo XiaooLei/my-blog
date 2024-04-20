@@ -40,7 +40,7 @@ app.add_middleware(
 )
 
 # 数据库配置（请根据你的实际情况修改）
-SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:XWPWXL6266Alita@localhost:3306/blog'
+SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:XWPWXL6266Alita%@localhost:3306/blog'
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(bind=engine)
 
