@@ -33,7 +33,7 @@ export const addArticle = async (article) => {
     try {
         console.log("enter addArticle");
         // 构建请求 URL
-        const url = `${API_END_POINT}:8000/blog/`;
+        const url = `${API_END_POINT}/blog/`;
         // 设置请求头
         const headers = {
             'Accept': 'application/json',
@@ -109,7 +109,7 @@ export const deleteArticle = async (id) => {
 
 export const tryLogin = async (account, password) => {
     try {
-        const url = `${API_END_POINT}:8000/login`;
+        const url = `${API_END_POINT}/login`;
         const headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
