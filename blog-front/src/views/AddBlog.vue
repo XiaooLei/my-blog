@@ -1,7 +1,6 @@
 <template>
     <div class="new-blog-container">
         <div class="new-blog">
-            <h1>新增博客</h1>
             <el-form :model="blogForm" label-width="120px">
                 <el-form-item label="标题">
                     <el-input v-model="blogForm.title"></el-input>
@@ -102,6 +101,7 @@ export default {
 
 .new-blog-container {
     margin-top: 60px;
+    padding: 20px;
     display: flex;
     justify-content: center; /* 水平居中 */
 }
