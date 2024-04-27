@@ -30,7 +30,7 @@
         </div>
       </div>
     </div>
-    <div class="flex overflow-y-auto gap-4 flex-row flex-wrap justify-center py-5">
+    <div class="flex overflow-y-auto gap-4 flex-row flex-wrap justify-center py-5" style="min-width: 60%;">
       <!-- <div style="height: 20px; width:auto">xxxx </div> -->
       <div v-for="article in articlesTaged" :key="article.id" class="card card-compact w-96 bg-base-100 shadow-xl">
         <figure><img src="../assets/avator.jpeg" alt="Album" /></figure>
@@ -44,6 +44,8 @@
           </div>
         </div>
       </div>
+
+      <span v-show="articlesTaged.length===0">没有该标签的文章哦</span>
     </div>
     <div class="tags flex flex-col gap-4">
       <p v-for="tag in tags" :key="tag.id" style="cursor: pointer;"
@@ -109,6 +111,10 @@ export default {
       }
     },
     filterByTags(id) {
+      if (id===0) {
+        this.articlesTaged = this.articles
+        return
+      }
       this.selectedTagId = id
       let filteredArticles = []
       console.log("debug articles:", this.articles)

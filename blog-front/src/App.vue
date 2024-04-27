@@ -66,6 +66,10 @@ export default {
       activeIndex: '/about', // 如果你想在页面加载时默认激活"关于我"链接，可以设置为'/about'
       tags: [
         {
+          id: 0,
+          name: "全部",
+        },
+        {
           id: 1,
           name: "技术",
         },
