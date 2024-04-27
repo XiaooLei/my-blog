@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import sessionmaker
 from datetime import datetime
 from pydantic import BaseModel
-
+from typing import List
 
 # 定义数据库模型
 Base = declarative_base()
@@ -40,7 +40,7 @@ app.add_middleware(
 )
 
 # 数据库配置（请根据你的实际情况修改）
-SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:XWPWXL6266Alita%@localhost:3306/blog'
+SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:XWPWXL6266Alita%@127.0.0.1:3306/blog'
 engine = create_engine(SQLALCHEMY_DATABASE_URL, echo=True)
 SessionLocal = sessionmaker(bind=engine)
 
@@ -48,7 +48,7 @@ SessionLocal = sessionmaker(bind=engine)
 Base.metadata.create_all(bind=engine)
 
 # 获取所有博客
-@app.get("/blogs/", response_model=list[BlogView])
+@app.get("/blogs/", response_model=List[BlogView])
 def get_blogs():
     db = SessionLocal()
     blogs = db.query(Blog).all()
