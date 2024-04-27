@@ -16,7 +16,7 @@ class Blog(Base):
     title = Column(String(255), index=True)
     create_time = Column(Integer, default=0)  # 设置默认值为当前时间
     content = Column(Text)
-    tags = Column(String(255))
+    tags = Column(String(255), default="")
 
 class BlogView(BaseModel):
     id: int = 0
@@ -58,6 +58,8 @@ def get_blogs():
     res = []
     for blog in blogs:
         blog_dict = blog.__dict__
+        if blog_dict['tags'] is None:
+            blog_dict['tags'] = ""
         res.append(BlogView(**blog_dict))
     return res
 
