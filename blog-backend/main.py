@@ -16,11 +16,13 @@ class Blog(Base):
     title = Column(String(255), index=True)
     create_time = Column(Integer, default=0)  # 设置默认值为当前时间
     content = Column(Text)
+    tags = Column(String(255))
 
 class BlogView(BaseModel):
     id: int = 0
     title: str = ""
     create_time: int = int(datetime.now().timestamp())
+    tags: str = ""
     content: str = ""
 
 class LoginInput(BaseModel):

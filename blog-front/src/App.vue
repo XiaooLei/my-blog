@@ -76,7 +76,20 @@ export default {
         {
           id: 3,
           name: "生活"
-        }],
+        },
+        {
+          id: 4,
+          name: "创业"
+        },
+        {
+          id: 5,
+          name: "恋爱"
+        },
+        {
+          id: 6,
+          name: "其他"
+        }
+      ],
         searchKey: ""
     };
   },
