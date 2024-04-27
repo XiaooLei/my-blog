@@ -1,33 +1,37 @@
 <template>
-  <div class="home-container">
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <figure class="px-10 pt-10">
-        <img src="../assets/avator.jpeg" alt="Shoes" class="rounded-xl" />
-      </figure>
-      <div class="card-body items-center text-center">
-        <h2 class="card-title">小磊</h2>
-        <div class="flex gap-8">
-          <span class="font-medium">文章 {{articles.length}}</span> 
-          <span class="font-medium">标签 {{tags.length}}</span>   
-        </div>
-        <p class="font-normal text-sm	">千里之行,始于足下</p>
-        <div class="card-actions">
-          <button class="btn btn-primary btn-block	 w-full h-12"
-          @click="this.$router.replace({ path: '/about'})">个人主页</button>
-        </div>
-        <div class="social-links">
-          <a href="https://github.com/xiaoolei" target="_blank" class="text-blue-500 hover:text-blue-600">
-            <i class="fa fa-github"></i> GitHub
-          </a>
-          <span class="mx-4">|</span> <!-- 分隔符 -->
-          <a href="" class="text-green-500 hover:text-green-600">
-            <i class="fa fa-weixin"></i> 微信
-          </a>
-          <!-- 可以继续添加其他链接 -->
+  <!-- <div class="home-container min-h-screen "> -->
+  <div class="flex h-screen overflow-hidden home-container">
+    <div style="margin-top: 40px;">
+      <div class="card w-48 h-auto bg-base-100 shadow-xl">
+        <figure class="px-10 pt-10">
+          <img src="../assets/avator.jpeg" alt="Shoes" class="rounded-xl" />
+        </figure>
+        <div class="card-body items-center text-center">
+          <h2 class="card-title">小磊</h2>
+          <div class="flex gap-8">
+            <span class="font-medium">文章 {{ articles.length }}</span>
+            <span class="font-medium">标签 {{ tags.length }}</span>
+          </div>
+          <p class="font-normal text-sm	">千里之行,始于足下</p>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-block	 w-full h-12"
+              @click="this.$router.push({ path: '/about' })">个人主页</button>
+          </div>
+          <div class="social-links">
+            <a href="https://github.com/xiaoolei" target="_blank" class="text-blue-500 hover:text-blue-600">
+              <i class="fa fa-github"></i> GitHub
+            </a>
+            <span class="mx-4">|</span> <!-- 分隔符 -->
+            <a href="" class="text-green-500 hover:text-green-600">
+              <i class="fa fa-weixin"></i> 微信
+            </a>
+            <!-- 可以继续添加其他链接 -->
+          </div>
         </div>
       </div>
     </div>
-    <div class="flex gap-4 flex-row flex-wrap justify-center">
+    <div class="flex overflow-y-auto gap-4 flex-row flex-wrap justify-center py-5">
+      <!-- <div style="height: 20px; width:auto">xxxx </div> -->
       <div v-for="article in articles" :key="article.id" class="card card-compact w-96 bg-base-100 shadow-xl">
         <figure><img src="../assets/avator.jpeg" alt="Album" /></figure>
         <div style="position: relative;" class="card-body">
@@ -35,18 +39,19 @@
           <p v-html="renderMarkdown(article.summary)"></p>
           <div class="card-actions justify-end">
             <button class="btn btn-primary h-1.5"
-              @click="this.$router.replace({ path: '/article/' + article.id })">阅读全文</button>
-            <span class="absolute bottom-4 left-3 font-normal">发布于 {{formatTimestamp(article.create_time)}}</span>
+              @click="this.$router.push({ path: '/article/' + article.id })">阅读全文</button>
+            <span class="absolute bottom-4 left-3 font-normal">发布于 {{ formatTimestamp(article.create_time) }}</span>
           </div>
         </div>
       </div>
     </div>
     <div class="tags flex flex-col gap-4">
-      <p v-for="tag in tags" :key="tag.id" style="cursor: pointer;" :class="{ active: selectedTagId === tag.id }"
-      class="text-lg font-medium"
-        @click="filterByTags(tag.id)">{{ tag.name }}</p>
+      <p v-for="tag in tags" :key="tag.id" style="cursor: pointer;"
+        :class="['hover:bg-violet-600 active:bg-violet-700 focus:outline-none focus:ring', { active: selectedTagId === tag.id }]"
+        class="text-lg font-medium" @click="filterByTags(tag.id)">{{ tag.name }}</p>
     </div>
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -124,11 +129,9 @@ fetchArticles();
 .home-container {
   max-width: full;
   margin: 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
   margin-top: 60px;
-  display: flex;
-  align-items: center;
-  gap:20px;
+  gap: 20px;
 }
 
 .home-title {
@@ -176,6 +179,7 @@ fetchArticles();
 }
 
 .tags {
+  margin-top: 20%;
   width: 20%;
 }
 

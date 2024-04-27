@@ -181,9 +181,9 @@ header {
 }
 
 .main-container {
-  margin-right: 10%;
-  margin-left: 10%;
-  min-height: 1000px;
+  margin-right: 2%;
+  margin-left: 2%;
+  min-height: 100vh;
 }
 
 </style>
