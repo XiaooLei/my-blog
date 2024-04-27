@@ -22,20 +22,15 @@
                         />
                     </div>
                 </el-form-item>
-                <!-- <div class="mb-2 flex items-center text-sm"> -->
-                    <el-radio-group v-model="selectedTagId" class="ml-4">
-                      <el-radio :value="tag.id" v-for="tag in tags" :key="tag.id" size="large">{{tag.name}}</el-radio>
-                    </el-radio-group>
-                <!-- </div> -->
+                <!-- 标签 -->
+                <el-checkbox v-for="tag in tags" :key="tag.id" v-model="selectedTags" :label="tag.id" size="large" > {{ tag.name }} </el-checkbox>
                 <el-form-item>
                     <el-button type="primary" @click="submitBlog(); this.$router.replace('/');" style="display: block; margin: 0 auto;">提交</el-button>
                 </el-form-item>
             </el-form>
-
         </div>
     </div>
 </template>
-
 <script>
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 import { onBeforeUnmount, ref, shallowRef } from 'vue'
@@ -50,11 +45,12 @@ export default {
   setup() {
     const tags = inject('tags');
 
-    let selectedTagId = ref(0);
+    let selectedTags = ref([]);
 
     const blogForm = ref({
         title: '',
-        content: ''
+        content: '',
+        tags: '',
     });
 
     // 编辑器实例，必须用 shallowRef
@@ -75,10 +71,18 @@ export default {
     }
 
     const submitBlog = () => {
+        console.log("selectedTags:", selectedTags.value);
         // 在这里处理表单提交逻辑，例如使用axios发送POST请求到后端API
         console.log('提交的博客信息:', blogForm.value.content);
         // 假设提交成功后的操作
+
+        // selectedTags
+        blogForm.value.tags = selectedTags.value.join(',');
+
+        console.log("blogForm:", blogForm.value);
+
         addArticle(blogForm.value);
+        
         ElMessage.success('博客提交成功！');
     };
 
@@ -91,7 +95,7 @@ export default {
       submitBlog,
       blogForm,
       tags,
-      selectedTagId
+      selectedTags,
     };
   }
 }

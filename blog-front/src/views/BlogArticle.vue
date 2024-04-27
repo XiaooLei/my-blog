@@ -34,9 +34,10 @@ export default {
     return {
       article: {
         id: "0",
-        title: "ddd",
-        summary: "ddd",
-        content: "This is some **bold** text.",
+        title: "",
+        summary: "",
+        content: "",
+        tags: [],
       },
       error: null,
     };

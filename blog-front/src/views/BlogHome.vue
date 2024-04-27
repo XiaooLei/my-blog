@@ -32,7 +32,7 @@
     </div>
     <div class="flex overflow-y-auto gap-4 flex-row flex-wrap justify-center py-5">
       <!-- <div style="height: 20px; width:auto">xxxx </div> -->
-      <div v-for="article in articles" :key="article.id" class="card card-compact w-96 bg-base-100 shadow-xl">
+      <div v-for="article in articlesTaged" :key="article.id" class="card card-compact w-96 bg-base-100 shadow-xl">
         <figure><img src="../assets/avator.jpeg" alt="Album" /></figure>
         <div style="position: relative;" class="card-body">
           <h2 class="card-title">{{ article.title }}</h2>
@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       articles: [],
+      articlesTaged:[],
       md: new MarkdownIt({
         html: true,
         linkify: true,
@@ -79,6 +80,7 @@ export default {
     async loadArticles() {
       try {
         const data = await fetchArticles();
+        // console.log("data_1:", data)
         const summaryLength = 200;
         for (const article of data) {
           // 确保article对象有content属性
@@ -88,18 +90,38 @@ export default {
             if (summary.length < article.content.length) {
               summary += '...';
             }
+            // console.log("article.tags:", article.tags)
             // 设置文章的summary属性
             article.summary = summary;
+            if (article.tags === undefined) {
+              article.tags = ""
+            }
+            // console.log("article.tags 2:", article.tags)
+            article.tags = article.tags.split(',').map(element => {return Number(element);})
+            // console.log("article.tags 3:", article.tags)
           }
         }
+        console.log("data:", data)
         this.articles = data;
+        this.articlesTaged = this.articles;
       } catch (error) {
         console.error('Error fetching articles:', error);
       }
     },
     filterByTags(id) {
       this.selectedTagId = id
+      let filteredArticles = []
+      console.log("debug articles:", this.articles)
+      console.log("filter tag id:", id)
+      for (let article of this.articles) {
+        console.log("debug article one:", article)
+        if (article.tags.includes(id)) {
+          filteredArticles.push(article)
+        }
+      }
       console.log("filter", id, this.selectedTagId)
+      console.log("filtered articles:", filteredArticles)
+      this.articlesTaged = filteredArticles
     },
     formatTimestamp(timestamp) {
       // 将秒级别时间戳转换为毫秒级别
@@ -121,7 +143,7 @@ export default {
   }
 }
 
-fetchArticles();
+// fetchArticles();
 
 </script>
 
