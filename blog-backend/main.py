@@ -71,6 +71,8 @@ def get_blog(blog_id: int):
     blog = db.query(Blog).filter(Blog.id == blog_id).first()
     db.close()
     blog_dict = blog.__dict__
+    if blog_dict['tags'] is None:
+        blog_dict['tags'] = ""
     return BlogView(**blog_dict)
 
 # 新增博客
