@@ -23,13 +23,13 @@
                         />
                     </div>
                 </el-form-item>
-                <div class="mb-2 flex items-center text-sm">
+                <!-- <div class="mb-2 flex items-center text-sm"> -->
                     <el-radio-group v-model="selectedTagId" class="ml-4">
                       <el-radio :value="tag.id" v-for="tag in tags" :key="tag.id" size="large">{{tag.name}}</el-radio>
                     </el-radio-group>
-                </div>
+                <!-- </div> -->
                 <el-form-item>
-                    <el-button type="primary" @click="submitBlog" style="display: block; margin: 0 auto;">提交</el-button>
+                    <el-button type="primary" @click="submitBlog(); this.$router.replace('/');" style="display: block; margin: 0 auto;">提交</el-button>
                 </el-form-item>
             </el-form>
 
@@ -102,6 +102,8 @@ export default {
 
 .new-blog-container {
     margin-top: 60px;
+    display: flex;
+    justify-content: center; /* 水平居中 */
 }
 
 
